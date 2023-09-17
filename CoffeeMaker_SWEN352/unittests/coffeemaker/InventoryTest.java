@@ -9,14 +9,16 @@ import org.junit.Before;
 import org.junit.Test;
 
 import coffeemaker.exceptions.InventoryException;
+import coffeemaker.exceptions.RecipeException;
 
 public class InventoryTest {
 
     Inventory tInventory;
-
+    Recipe recipe;
     @Before
     public void setUp() {
         tInventory = new Inventory();
+        recipe = new Recipe();
     }
 
     @After
@@ -441,6 +443,68 @@ public class InventoryTest {
 
 
     @Test
-    public void test
+    public void testUseIngredients() {
+        try {
+            recipe.setAmtChocolate("10");
+            recipe.setAmtCoffee("10");
+            recipe.setAmtMilk("10");
+            recipe.setAmtSugar("10");
+
+        } catch (RecipeException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
+        assertTrue(tInventory.enoughIngredients(recipe));
+
+    }
+
+    @Test
+    public void testUseIngredientsWithInsufficientAmount() {
+        try {
+            recipe.setAmtChocolate("20");
+            recipe.setAmtCoffee("20");
+            recipe.setAmtMilk("20");
+            recipe.setAmtSugar("20");
+
+        } catch (RecipeException e) {
+            e.printStackTrace();
+        }
+
+        assertFalse(tInventory.useIngredients(recipe));
+
+    }
+
+
+    @Test
+    public void testInventoryAfterIngredientsUsage() {
+
+        String recipeAmountStr = "10";
+        int recipeAmount  = 10;
+        int inventoryAmount = recipeAmount * 2;
+        try {
+
+            tInventory.setChocolate(inventoryAmount);
+            tInventory.setMilk(inventoryAmount);
+            tInventory.setSugar(inventoryAmount);
+            tInventory.setCoffee(inventoryAmount);
+
+            recipe.setAmtChocolate(recipeAmountStr);
+            recipe.setAmtCoffee(recipeAmountStr);
+            recipe.setAmtMilk(recipeAmountStr);
+            recipe.setAmtSugar(recipeAmountStr);
+        } catch (RecipeException e) {
+            e.printStackTrace();
+        }
+
+        assertTrue(tInventory.useIngredients(recipe));
+
+
+        assertEquals(inventoryAmount-recipeAmount,tInventory.getChocolate());
+        assertEquals(inventoryAmount-recipeAmount,tInventory.getCoffee());
+        assertEquals(inventoryAmount-recipeAmount,tInventory.getMilk());
+        assertEquals(inventoryAmount-recipeAmount,tInventory.getSugar());
+
+    }
 
 }
