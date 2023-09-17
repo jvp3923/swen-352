@@ -29,7 +29,7 @@ public class InventoryTest {
 
         tInventory.setChocolate(-1);
 
-        assertEquals(addedChocolate,tInventory.getChocolate());
+        assertEquals(addedChocolate, tInventory.getChocolate());
     }
 
     @Test
@@ -38,24 +38,24 @@ public class InventoryTest {
 
         tInventory.setChocolate(-1000);
 
-        assertEquals(addedChocolate,tInventory.getChocolate());
+        assertEquals(addedChocolate, tInventory.getChocolate());
     }
 
     @Test
     public void testSettingZeroChocolate() {
         int addedChocolate = 20;
         tInventory.setChocolate(addedChocolate);
-        assertEquals(addedChocolate,tInventory.getChocolate());
+        assertEquals(addedChocolate, tInventory.getChocolate());
         addedChocolate = 0;
         tInventory.setChocolate(addedChocolate);
-        assertEquals(addedChocolate,tInventory.getChocolate());
+        assertEquals(addedChocolate, tInventory.getChocolate());
     }
 
     @Test
     public void testSettingPositiveChocolate() {
         int addedChocolate = 20;
         tInventory.setChocolate(addedChocolate);
-        assertEquals(addedChocolate,tInventory.getChocolate());
+        assertEquals(addedChocolate, tInventory.getChocolate());
 
     }
 
@@ -63,7 +63,7 @@ public class InventoryTest {
     public void testSettingPositiveChocolate2() {
         int addedChocolate = 20;
         tInventory.setChocolate(addedChocolate);
-        assertEquals(addedChocolate,tInventory.getChocolate());
+        assertEquals(addedChocolate, tInventory.getChocolate());
 
     }
 
@@ -89,7 +89,7 @@ public class InventoryTest {
             tInventory.addChocolate("0");
         });
 
-        assertEquals(nChocolate,tInventory.getChocolate());
+        assertEquals(nChocolate, tInventory.getChocolate());
     }
 
     @Test
@@ -99,7 +99,7 @@ public class InventoryTest {
             tInventory.addChocolate("10");
         });
 
-        assertEquals(nChocolate + 10,tInventory.getChocolate());
+        assertEquals(nChocolate + 10, tInventory.getChocolate());
     }
 
     @Test
@@ -109,6 +109,7 @@ public class InventoryTest {
         });
 
     }
+
     @Test
     public void testAddingNegativeNonIntegerInvalid() {
         assertThrowsExactly(InventoryException.class, () -> {
@@ -117,5 +118,216 @@ public class InventoryTest {
 
     }
 
+    @Test
+    public void testGetChocolocate() {
+        int expectedChocolate = 10;
+        tInventory.setChocolate(expectedChocolate);
+        assertEquals(expectedChocolate, tInventory.getChocolate());
+    }
+
+    @Test
+    public void testSettingNegativeCoffee() {
+        int addedCoffee = tInventory.getCoffee();
+
+        tInventory.setCoffee(-1);
+
+        assertEquals(addedCoffee, tInventory.getCoffee());
+    }
+
+    @Test
+    public void testSettingNegativeCoffee2() {
+        int addedCoffee = tInventory.getCoffee();
+
+        tInventory.setCoffee(-1000);
+
+        assertEquals(addedCoffee, tInventory.getCoffee());
+    }
+
+    @Test
+    public void testSettingZeroCoffee() {
+        int addedCoffee = 20;
+        tInventory.setCoffee(addedCoffee);
+        assertEquals(addedCoffee, tInventory.getCoffee());
+        addedCoffee = 0;
+        tInventory.setCoffee(addedCoffee);
+        assertEquals(addedCoffee, tInventory.getCoffee());
+    }
+
+    @Test
+    public void testSettingPositiveCoffee() {
+        int addedCoffee = 20;
+        tInventory.setCoffee(addedCoffee);
+        assertEquals(addedCoffee, tInventory.getCoffee());
+
+    }
+
+    @Test
+    public void testSettingPositiveCoffee2() {
+        int addedCoffee = 1;
+        tInventory.setCoffee(addedCoffee);
+        assertEquals(addedCoffee, tInventory.getCoffee());
+
+    }
+
+    @Test
+    public void testAddingInvalidCoffee() {
+
+        assertThrowsExactly(InventoryException.class, () -> {
+            tInventory.addCoffee("-100");
+        });
+    }
+
+    @Test
+    public void testAddingInvalidCoffee2() {
+        assertThrowsExactly(InventoryException.class, () -> {
+            tInventory.addCoffee("0.0");
+        });
+    }
+
+    @Test
+    public void testAddingValidCoffee() {
+        int nCoffe = tInventory.getCoffee();
+        assertDoesNotThrow(() -> {
+            tInventory.addCoffee("0");
+        });
+
+        assertEquals(nCoffe, tInventory.getCoffee());
+    }
+
+    @Test
+    public void testAddingValiCoffee() {
+        int nCoffe = tInventory.getCoffee();
+        assertDoesNotThrow(() -> {
+            tInventory.addCoffee("10");
+        });
+
+        assertEquals(nCoffe + 10, tInventory.getCoffee());
+    }
+
+    @Test
+    public void testAddingNonIntegerInvalidCoffee() {
+        assertThrowsExactly(InventoryException.class, () -> {
+            tInventory.addCoffee("10.5");
+        });
+
+    }
+
+    @Test
+    public void testAddingNegativeNonIntegerInvalidCoffee() {
+        assertThrowsExactly(InventoryException.class, () -> {
+            tInventory.addCoffee("-10.5");
+        });
+
+    }
+
+    @Test
+    public void testGetCoffee() {
+        int expectedCoffee = 10;
+        tInventory.setChocolate(expectedCoffee);
+        assertEquals(expectedCoffee, tInventory.getChocolate());
+    }
+
+    @Test
+    public void testSettingNegativeMilk() {
+        int addedMilk = tInventory.getMilk();
+
+        tInventory.setMilk(-1);
+
+        assertEquals(addedMilk, tInventory.getMilk());
+    }
+
+    @Test
+    public void testSettingNegativeMilk2() {
+        int addedMilk = tInventory.getMilk();
+
+        tInventory.setMilk(-1000);
+
+        assertEquals(addedMilk, tInventory.getMilk());
+    }
+
+    @Test
+    public void testSettingZeroMilk() {
+        int addedMilk = 20;
+        tInventory.setMilk(addedMilk);
+        assertEquals(addedMilk, tInventory.getMilk());
+        addedMilk = 0;
+        tInventory.setMilk(addedMilk);
+        assertEquals(addedMilk, tInventory.getMilk());
+    }
+
+    @Test
+    public void testSettingPositiveMilk() {
+        int addedMilk = 20;
+        tInventory.setMilk(addedMilk);
+        assertEquals(addedMilk, tInventory.getMilk());
+
+    }
+
+    @Test
+    public void testSettingPositiveMilk2() {
+        int addedMilk = 1;
+        tInventory.setMilk(addedMilk);
+        assertEquals(addedMilk, tInventory.getMilk());
+
+    }
+
+    @Test
+    public void testAddingInvalidMilk() {
+
+        assertThrowsExactly(InventoryException.class, () -> {
+            tInventory.addMilk("-100");
+        });
+    }
+
+    @Test
+    public void testAddingInvalidMilk2() {
+        assertThrowsExactly(InventoryException.class, () -> {
+            tInventory.addMilk("0.0");
+        });
+    }
+
+    @Test
+    public void testAddingValidMilk() {
+        int nCoffe = tInventory.getMilk();
+        assertDoesNotThrow(() -> {
+            tInventory.addMilk("0");
+        });
+
+        assertEquals(nCoffe, tInventory.getMilk());
+    }
+
+    @Test
+    public void testAddingValidMilk2() {
+        int nCoffe = tInventory.getMilk();
+        assertDoesNotThrow(() -> {
+            tInventory.addMilk("10");
+        });
+
+        assertEquals(nCoffe + 10, tInventory.getMilk());
+    }
+
+    @Test
+    public void testAddingNonIntegerInvalidMilk() {
+        assertThrowsExactly(InventoryException.class, () -> {
+            tInventory.addMilk("10.5");
+        });
+
+    }
+
+    @Test
+    public void testAddingNegativeNonIntegerInvalidMilk() {
+        assertThrowsExactly(InventoryException.class, () -> {
+            tInventory.addMilk("-10.5");
+        });
+
+    }
+
+    @Test
+    public void testGetMilk() {
+        int expectedMilk = 10;
+        tInventory.setMilk(expectedMilk);
+
+        assertEquals(expectedMilk, tInventory.getMilk());
+    }
 
 }
