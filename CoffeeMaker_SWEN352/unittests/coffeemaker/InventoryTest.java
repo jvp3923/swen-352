@@ -23,6 +23,7 @@ public class InventoryTest {
     public void tearDown() throws Exception {
     }
     
+    @Test
     public void testToString() {
         assertNotEquals("",tInventory.toString());
     }
@@ -437,5 +438,9 @@ public class InventoryTest {
 
         assertEquals(expectedSugar, tInventory.getSugar());
     }
+
+
+    @Test
+    public void test
 
 }
