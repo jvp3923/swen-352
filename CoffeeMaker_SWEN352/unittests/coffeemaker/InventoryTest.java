@@ -22,6 +22,10 @@ public class InventoryTest {
     @After
     public void tearDown() throws Exception {
     }
+    
+    public void testToString() {
+        assertNotEquals("",tInventory.toString());
+    }
 
     @Test
     public void testSettingNegativeChocolate() {
@@ -328,6 +332,110 @@ public class InventoryTest {
         tInventory.setMilk(expectedMilk);
 
         assertEquals(expectedMilk, tInventory.getMilk());
+    }
+
+
+    @Test
+    public void testSettingNegativeSugar() {
+        int addedSugar = tInventory.getSugar();
+
+        tInventory.setSugar(-1);
+
+        assertEquals(addedSugar, tInventory.getSugar());
+    }
+
+    @Test
+    public void testSettingNegativeSugar2() {
+        int addedSugar = tInventory.getSugar();
+
+        tInventory.setSugar(-1000);
+
+        assertEquals(addedSugar, tInventory.getSugar());
+    }
+
+    @Test
+    public void testSettingZeroSugar() {
+        int addedSugar = 20;
+        tInventory.setSugar(addedSugar);
+        assertEquals(addedSugar, tInventory.getSugar());
+        addedSugar = 0;
+        tInventory.setSugar(addedSugar);
+        assertEquals(addedSugar, tInventory.getSugar());
+    }
+
+    @Test
+    public void testSettingPositiveSugar() {
+        int addedSugar = 20;
+        tInventory.setSugar(addedSugar);
+        assertEquals(addedSugar, tInventory.getSugar());
+
+    }
+
+    @Test
+    public void testSettingPositiveSugar2() {
+        int addedSugar = 1;
+        tInventory.setSugar(addedSugar);
+        assertEquals(addedSugar, tInventory.getSugar());
+
+    }
+
+    @Test
+    public void testAddingInvalidSugar() {
+
+        assertThrowsExactly(InventoryException.class, () -> {
+            tInventory.addSugar("-100");
+        });
+    }
+
+    @Test
+    public void testAddingInvalidSugar2() {
+        assertThrowsExactly(InventoryException.class, () -> {
+            tInventory.addSugar("0.0");
+        });
+    }
+
+    @Test
+    public void testAddingValidSugar() {
+        int nCoffe = tInventory.getSugar();
+        assertDoesNotThrow(() -> {
+            tInventory.addSugar("0");
+        });
+
+        assertEquals(nCoffe, tInventory.getSugar());
+    }
+
+    @Test
+    public void testAddingValidSugar2() {
+        int nCoffe = tInventory.getSugar();
+        assertDoesNotThrow(() -> {
+            tInventory.addSugar("10");
+        });
+
+        assertEquals(nCoffe + 10, tInventory.getSugar());
+    }
+
+    @Test
+    public void testAddingNonIntegerInvalidSugar() {
+        assertThrowsExactly(InventoryException.class, () -> {
+            tInventory.addSugar("10.5");
+        });
+
+    }
+
+    @Test
+    public void testAddingNegativeNonIntegerInvalidSugar() {
+        assertThrowsExactly(InventoryException.class, () -> {
+            tInventory.addSugar("-10.5");
+        });
+
+    }
+
+    @Test
+    public void testGetSugar() {
+        int expectedSugar = 10;
+        tInventory.setSugar(expectedSugar);
+
+        assertEquals(expectedSugar, tInventory.getSugar());
     }
 
 }
