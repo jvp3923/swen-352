@@ -175,8 +175,8 @@ public class Recipe {
 		if (getClass() != obj.getClass())
 			return false;
 		final Recipe other = (Recipe) obj;
-		if (name == null) {
-			if (other.name != null)
+		if (name == "") { // null needed to be changed to  "" because name can not be set to null
+			if (other.name != "")
 				return false;
 		} else if (!name.equals(other.name))
 			return false;
