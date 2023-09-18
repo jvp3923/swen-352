@@ -72,4 +72,21 @@ public class RecipeBookTest {
 		assertEquals(result, null);
 	}
 
+	@Test
+	public void testDeleteInvalidRecipe() {
+		RecipeBook rb = new RecipeBook();
+		Recipe[] recipes;
+		String result;
+		
+		Recipe recipe = new Recipe();
+		recipe.setName("delete me");
+		rb.addRecipe(recipe);
+		
+		result = rb.deleteRecipe(0);
+		assertEquals(result, "delete me");
+		
+		result = rb.deleteRecipe(10);
+		assertEquals(result, null);
+	}
+
 }

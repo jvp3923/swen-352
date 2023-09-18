@@ -15,6 +15,7 @@ public class InventoryTest {
 
     Inventory tInventory;
     Recipe recipe;
+
     @Before
     public void setUp() {
         tInventory = new Inventory();
@@ -24,10 +25,10 @@ public class InventoryTest {
     @After
     public void tearDown() throws Exception {
     }
-    
+
     @Test
     public void testToString() {
-        assertNotEquals("",tInventory.toString());
+        assertNotEquals("", tInventory.toString());
     }
 
     @Test
@@ -337,7 +338,6 @@ public class InventoryTest {
         assertEquals(expectedMilk, tInventory.getMilk());
     }
 
-
     @Test
     public void testSettingNegativeSugar() {
         int addedSugar = tInventory.getSugar();
@@ -441,7 +441,6 @@ public class InventoryTest {
         assertEquals(expectedSugar, tInventory.getSugar());
     }
 
-
     @Test
     public void testUseIngredients() {
         try {
@@ -475,12 +474,11 @@ public class InventoryTest {
 
     }
 
-
     @Test
     public void testInventoryAfterIngredientsUsage() {
 
         String recipeAmountStr = "10";
-        int recipeAmount  = 10;
+        int recipeAmount = 10;
         int inventoryAmount = recipeAmount * 2;
         try {
 
@@ -498,12 +496,10 @@ public class InventoryTest {
         }
 
         assertTrue(tInventory.useIngredients(recipe));
-
-
-        assertEquals(inventoryAmount-recipeAmount,tInventory.getChocolate());
-        assertEquals(inventoryAmount-recipeAmount,tInventory.getCoffee());
-        assertEquals(inventoryAmount-recipeAmount,tInventory.getMilk());
-        assertEquals(inventoryAmount-recipeAmount,tInventory.getSugar());
+        assertEquals(inventoryAmount - recipeAmount, tInventory.getChocolate());
+        assertEquals(inventoryAmount - recipeAmount, tInventory.getCoffee());
+        assertEquals(inventoryAmount - recipeAmount, tInventory.getMilk());
+        assertEquals(inventoryAmount - recipeAmount, tInventory.getSugar());
 
     }
 

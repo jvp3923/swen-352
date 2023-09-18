@@ -55,6 +55,9 @@ public class RecipeBook {
 	 * @return String
 	 */
 	public synchronized String deleteRecipe(int recipeToDelete) {
+
+		if (recipeToDelete < 0 || recipeToDelete >= NUM_RECIPES) return null;
+
 		if (recipeArray[recipeToDelete] != null) {
 			String recipeName = recipeArray[recipeToDelete].getName();
 			recipeArray[recipeToDelete] = new Recipe();
