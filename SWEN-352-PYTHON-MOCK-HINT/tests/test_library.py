@@ -33,8 +33,10 @@ class TestLibrary(unittest.TestCase):
         self.assertTrue(self.lib.is_book_by_author("bob", "learning python"))
     
     def test_get_languages_for_book(self):
-        self.lib.api.get_ebooks = Mock(return_value=self.books_data)
-        self.assertEqual(self.lib.get_languages_for_book("learning python"), {'ger', 'por', 'eng'})
+        self.lib.api.get_book_info = Mock(return_value=[{
+            "language": "f"
+        }])
+        self.assertEqual(self.lib.get_languages_for_book("learning python"), {"f"})
 
     def test_register_patron(self):
         self.assertEqual(self.lib.register_patron("Ben", "Dover", 69, 420), None)
