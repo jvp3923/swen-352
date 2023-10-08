@@ -264,7 +264,7 @@ class RecipeTest {
 	}
 	
 	@Test
-	void testEqualsNameNull() {
+	void testEqualsNameNull() { // This test now enters the correct false return
 		Recipe recipe = new Recipe();
 		Recipe recipe2 = new Recipe();
 		recipe2.setName("Dylan");
