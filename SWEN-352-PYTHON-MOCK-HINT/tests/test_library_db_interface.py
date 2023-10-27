@@ -16,6 +16,7 @@ class TestLibbraryDBInterface(unittest.TestCase):
         "borrowed_books": 5
     }
 
+
     def test_insert_patron_not_in_db(self):
         patron_mock = Mock()
         self.db_interface.retrieve_patron = Mock(return_value=None)

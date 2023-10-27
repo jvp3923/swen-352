@@ -1,5 +1,7 @@
 import unittest
 from unittest.mock import Mock
+
+from library.library_db_interface import Library_DB
 from library import library, patron
 import json
 
@@ -11,6 +13,9 @@ class TestLibrary(unittest.TestCase):
         # self.books_data = [{'title': 'Learning Python', 'ebook_count': 3}, {'title': 'Learning Python (Learning)', 'ebook_count': 1}, {'title': 'Learning Python', 'ebook_count': 1}, {'title': 'Learn to Program Using Python', 'ebook_count': 1}, {'title': 'Aprendendo Python', 'ebook_count': 1}, {'title': 'Python Basics', 'ebook_count': 1}]
         with open('tests_data/ebooks.txt', 'r') as f:
             self.books_data = json.loads(f.read())
+
+    def test_constructor_db(self):
+        self.assertEqual(self.lib.db.__class__, Library_DB) 
 
     def test_is_ebook_true(self):
         self.lib.api.get_ebooks = Mock(return_value=self.books_data)
@@ -56,7 +61,7 @@ class TestLibrary(unittest.TestCase):
         self.assertTrue(self.lib.is_book_borrowed('learning python', pat))
 
     def test_return_borrowed_book(self):
-        pat = patron.Patron('Ben', 'Dover', 69, 420)
+        pat = patron.Patron('Ben', 'Dover', 70, 420)
         self.lib.borrow_book('learning python', pat)
         self.lib.return_borrowed_book('learning python', pat)
         self.assertFalse(self.lib.is_book_borrowed('learning python', pat))

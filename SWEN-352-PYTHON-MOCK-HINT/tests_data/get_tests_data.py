@@ -24,6 +24,6 @@ class GetData:
             f.write(json.dumps(json_data))
 
 if __name__ == "__main__":
-    getdata = GetData()
+    getdata = None
     getdata.get_ebooks('learning python')
     getdata.get_json('learning python')

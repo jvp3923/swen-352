@@ -44,7 +44,6 @@ class TestExtApiInterface(unittest.TestCase):
         self.assertEqual(self.api.books_by_author(self.book), [])
     
     def test_is_book_available_True(self):
-        self.api.make_request = Mock(return_value=self.json_data)
         self.assertEqual(self.api.is_book_available(self.book), True)
 
     def test_is_book_available_False(self):
@@ -52,10 +51,7 @@ class TestExtApiInterface(unittest.TestCase):
         self.assertEqual(self.api.is_book_available(self.book), False)
 
     def test_get_book_info(self):
-        self.api.make_request = Mock(return_value=self.json_data)
-        self.assertIsNotNone(self.api.get_book_info("my book"))
-
+        self.assertNotEqual(self.api.get_book_info("my book"), [])
     
     def test_books_by_author(self):
-        self.api.make_request = Mock(return_value=self.json_data)
-        self.assertIsNotNone(self.api.books_by_author(self.book))
+        self.assertNotEqual(self.api.books_by_author(self.book), [])

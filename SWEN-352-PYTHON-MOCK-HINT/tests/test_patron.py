@@ -6,6 +6,10 @@ class TestPatron(unittest.TestCase):
     def setUp(self):
         self.pat = patron.Patron('fname', 'lname', '20', '1234')
 
+    def test_age_exists(self):
+        self.pat = patron.Patron('fname', 'lname', '20', '1234')
+        self.assertIsNotNone(self.pat.age)
+
     def test_valid_name(self):
         pat = patron.Patron('fname', 'lname', '20', '1234')
         self.assertTrue(isinstance(pat, patron.Patron))
