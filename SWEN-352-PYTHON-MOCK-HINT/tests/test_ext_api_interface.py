@@ -55,3 +55,17 @@ class TestExtApiInterface(unittest.TestCase):
     
     def test_books_by_author(self):
         self.assertNotEqual(self.api.books_by_author(self.book), [])
+
+    def test_get_ebooks_correct_url(self):
+        expected_url = "%s?q=%s" % (self.api.API_URL, self.book)
+        self.api.make_request = Mock(return_value={'docs': []})
+        self.api.get_ebooks(self.book)
+        self.api.make_request.assert_called_with(expected_url)
+    
+    def test_get_ebooks_url_not_none(self):
+        def mock_make_request(url):
+            self.assertIsNotNone(url)
+            return self.json_data
+        
+        self.api.make_request = mock_make_request
+        self.api.get_ebooks(self.book)
