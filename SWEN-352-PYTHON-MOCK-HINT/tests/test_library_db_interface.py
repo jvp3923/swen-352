@@ -15,7 +15,41 @@ class TestLibbraryDBInterface(unittest.TestCase):
         "memberID": 1,
         "borrowed_books": 5
     }
+        
+    def test_database_file(self):
+        self.assertEqual(Library_DB.DATABASE_FILE, 'db.json')
+    
+    def test_update_patron_uses_correct_memberID(self):
+        patron_mock = Mock()
+        patron_id = 1
+        patron_mock.get_memberID.return_value = patron_id
+        data = {'fname': 'name', 'lname': 'name', 'age': 'age', 'memberID': patron_id,
+                'borrowed_books': []}
+        self.db_interface.convert_patron_to_db_format = Mock(return_value=data)
 
+        db_data = [
+            {"memberID": patron_id, "updated": False},
+            {"memberID": 2, "updated": False}
+        ]
+
+        def mock_search(condition):
+            return [record for record in db_data if condition(record)]
+
+        def mock_update(new_data, condition):
+            for record in db_data:
+                if condition(record):
+                    record["updated"] = True
+
+        self.db_interface.db.search = mock_search
+        self.db_interface.db.update = mock_update
+
+        self.db_interface.update_patron(patron_mock)
+
+        matching_record = next(record for record in db_data if record["memberID"] == patron_id)
+        non_matching_record = next(record for record in db_data if record["memberID"] != patron_id)
+
+        self.assertTrue(matching_record["updated"], "Expected record with matching memberID to be updated")
+        self.assertFalse(non_matching_record["updated"], "Did not expect record with non-matching memberID to be updated")
 
     def test_insert_patron_not_in_db(self):
         patron_mock = Mock()

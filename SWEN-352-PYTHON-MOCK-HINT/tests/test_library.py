@@ -46,6 +46,26 @@ class TestLibrary(unittest.TestCase):
     def test_register_patron(self):
         self.assertEqual(self.lib.register_patron("Ben", "Dover", 69, 420), None)
 
+    def test_register_patron_valid(self):
+        fname, lname, age, memberID = "Ben", "Dover", 69, 420
+
+        insert_patron_args = []
+
+        def mock_insert_patron(p):
+            insert_patron_args.append(p)
+            return None
+        
+        self.lib.db.insert_patron = mock_insert_patron
+
+        self.lib.register_patron(fname, lname, age, memberID)
+
+        inserted_patron = insert_patron_args[0]
+        self.assertIsInstance(inserted_patron, patron.Patron)
+        self.assertEqual(inserted_patron.fname, fname)
+        self.assertEqual(inserted_patron.lname, lname)
+        self.assertEqual(inserted_patron.age, age)
+        self.assertEqual(inserted_patron.memberID, memberID)
+
     def test_is_patron_registered(self):
         pat = patron.Patron('Ben', 'Dover', 69, 420)
         self.assertTrue(self.lib.is_patron_registered(pat))
